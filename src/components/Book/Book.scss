@@ -1,0 +1,52 @@
+.book {
+  position: relative;
+  transition: all 0.2s ease-in-out;
+
+  &__content {
+    transition: all 0.2s ease-in-out;
+  }
+  &:hover {
+    border-color: #f75454 !important;
+    box-shadow: 5px 5px 5px rgba(132, 132, 132, 0.6);
+    .book__content {
+      background-color: #fff;
+      position: relative;
+      z-index: 1;
+      transform: translateY(-44px);
+    }
+    .book__add {
+      opacity: 1;
+    }
+  }
+  &__add {
+    transition: all 0.2s ease-in-out;
+    right: 0;
+    opacity: 0;
+  }
+}
+.add-to-cart {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    left: 0;
+    height: 1px;
+    width: 0;
+    background-color: #161619;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+  }
+  &:hover {
+    &::after {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+}
+.heart {
+  &:hover {
+    color: #f75454;
+  }
+}

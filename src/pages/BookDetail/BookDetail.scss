@@ -1,0 +1,43 @@
+@import "../../mixin.scss";
+
+.book-detail {
+  .col-3 {
+    width: calc(100% / 12 * 3);
+  }
+  .col-4 {
+    width: calc(100% / 12 * 4);
+  }
+  .col-5 {
+    width: calc(100% / 12 * 5);
+  }
+  @include media(768px) {
+    .col-3,
+    .col-4,
+    .col-5 {
+      width: 100%;
+    }
+  }
+  .ant-input-number-input {
+    padding: 20px 11px;
+    text-align: center;
+  }
+  .ant-input-number,
+  .ant-btn {
+    width: 100%;
+  }
+  .heart {
+    color: #f75454;
+    &:hover {
+      color: #b63f3f;
+    }
+  }
+  .ant-tabs-top > .ant-tabs-nav {
+    margin-bottom: 50px;
+  }
+  .tabs{
+    transition: 0.1s ease-in-out;
+    &:hover{
+      background-color: rgba(0,0,0,.075);
+    }
+  }
+}

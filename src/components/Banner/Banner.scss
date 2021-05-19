@@ -1,0 +1,13 @@
+.banner{
+    background-image: url('../../assets//images/banner-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+    padding: 50px 0;
+    &__title{
+        color: #beb4b4;
+    }
+    &__content{
+        display: flex !important;
+    }
+}

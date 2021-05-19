@@ -1,0 +1,22 @@
+.related-book {
+  .slick-slide {
+    padding: 0 10px;
+  }
+  .slick-list {
+    margin: 0 -10px;
+  }
+  .slick-prev {
+    left: -50px;
+  }
+  .slick-next {
+    right: -50px;
+  }
+  .slick-prev,
+  .slick-next {
+    width: fit-content;
+    height: fit-content;
+  }
+  .slick-dots {
+    bottom: -50px;
+  }
+}
