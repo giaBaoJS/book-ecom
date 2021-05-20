@@ -1,0 +1,9 @@
+.topbar {
+}
+.ant-drawer-body {
+  padding: 0 !important;
+}
+.ant-drawer > * {
+  transition: transform 0.5s cubic-bezier(0.7, 0.3, 0.1, 1),
+    box-shadow 0.3s cubic-bezier(0.7, 0.3, 0.1, 4) !important;
+}

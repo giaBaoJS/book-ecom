@@ -1,0 +1,17 @@
+.cart {
+  background-color: #fff6f6;
+  &__wrap {
+    margin: 0 -15px;
+  }
+  .col-9 {
+    width: calc(100% / 12 * 9);
+  }
+  .col-3 {
+    width: calc(100% / 12 * 3);
+  }
+  a{
+    &:hover{
+      color: white;
+    }
+  }
+}

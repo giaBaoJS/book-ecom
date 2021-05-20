@@ -1,13 +1,13 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
 
 const Layout = (props) => {
   return (
     <>
-      <div>
-        {props.children}
-      </div>
+      <Header />
+      <div>{props.children}</div>
       <Footer />
     </>
   );
