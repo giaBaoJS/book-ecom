@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
+import { getAllAuthor } from "../../actions/authorAction";
 import Author from "./Author/Author";
 import "./ListAuthors.scss";
 const ListAuthors = () => {
+  const dispatch = useDispatch();
+  const { authors } = useSelector((state) => state.authorReducer);
+  useEffect(() => {
+    dispatch(getAllAuthor());
+  }, []);
+
   let settings = {
     dots: false,
     infinite: true,
@@ -37,14 +45,9 @@ const ListAuthors = () => {
   return (
     <div className="container">
       <Slider {...settings}>
-        <Author />
-        <Author />
-        <Author />
-        <Author />
-        <Author />
-        <Author />
-        <Author />
-        <Author />
+        {authors?.map((item, index) => (
+          <Author key={index} author={item} />
+        ))}
       </Slider>
     </div>
   );

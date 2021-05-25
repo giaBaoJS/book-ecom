@@ -2,14 +2,16 @@ import React from "react";
 import { Form, InputNumber, Button } from "antd";
 import { Link } from "react-router-dom";
 import { HeartFilled } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 const AddCard = () => {
   const [form] = Form.useForm();
+  const { bookDetail } = useSelector((state) => state.bookReducer);
 
   return (
     <div className="border border-gray-300">
       <div className="p-6 bg-gray-100	">
-        <span className="text-2xl font-medium">$59.95</span>
+        <span className="text-2xl font-medium">${bookDetail.price}</span>
       </div>
       <div className="p-5">
         <Form form={form} layout="vertical">
@@ -24,7 +26,6 @@ const AddCard = () => {
         </Form>
         <div>
           <Link className="flex items-center justify-center text-base heart">
-            {" "}
             <HeartFilled className="mr-3" /> Add to wishlist
           </Link>
         </div>

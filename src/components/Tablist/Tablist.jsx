@@ -1,9 +1,10 @@
 import React from "react";
 import { Tabs } from "antd";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const Tablist = () => {
   const { TabPane } = Tabs;
+  const { bookDetail } = useSelector((state) => state.bookReducer);
 
   return (
     <Tabs defaultActiveKey="1" centered size="large">
@@ -39,13 +40,13 @@ const Tablist = () => {
         <div className="container max-w-lg">
           <div className="flex justify-between p-4 tabs">
             <p className="text-lg font-medium">IDBook</p>
-            <p className="text-lg">12181544</p>
+            <p className="text-lg">{bookDetail.id}</p>
           </div>
           <div className="flex justify-between p-4 tabs">
             <p className="text-lg font-medium">Category:</p>
             <p className="text-lg">
               <Link className="heart" to="/">
-                Romance
+                {bookDetail.category.name}
               </Link>
             </p>
           </div>
@@ -53,7 +54,7 @@ const Tablist = () => {
             <p className="text-lg font-medium">Book Author:</p>
             <p className="text-lg">
               <Link className="heart" to="/">
-                Paul Nguyen
+                {bookDetail.author.name}
               </Link>
             </p>
           </div>

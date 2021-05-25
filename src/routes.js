@@ -1,3 +1,4 @@
+import Account from "./components/Account/Account";
 import Page_404 from "./components/Page_404/Page_404";
 import BookDetail from "./pages/BookDetail/BookDetail";
 import Cart from "./pages/Cart/Cart";
@@ -11,6 +12,7 @@ export const routes = [
   { path: "/book/:id", exact: false, component: BookDetail },
   { path: "/cart", exact: false, component: Cart },
   { path: "/profile/:id/wishlist", exact: false, component: WishList },
+  { path: "/account", exact: false, component: Account },
   {
     path: "",
     component: Page_404,

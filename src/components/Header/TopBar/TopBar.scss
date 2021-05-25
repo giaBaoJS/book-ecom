@@ -1,4 +1,8 @@
 .topbar {
+  .ant-badge-count {
+    background: black;
+  }
+
 }
 .ant-drawer-body {
   padding: 0 !important;
@@ -6,4 +10,17 @@
 .ant-drawer > * {
   transition: transform 0.5s cubic-bezier(0.7, 0.3, 0.1, 1),
     box-shadow 0.3s cubic-bezier(0.7, 0.3, 0.1, 4) !important;
+}
+.ant-drawer-header {
+  background-color: black !important;
+}
+.ant-drawer-title {
+  color: white !important;
+}
+.ant-drawer-close{
+  padding: 15px !important;
+  color: white !important;
+  &:focus{
+    outline: none !important;
+  }
 }

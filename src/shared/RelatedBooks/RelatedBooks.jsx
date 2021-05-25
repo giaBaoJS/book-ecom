@@ -1,9 +1,17 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import Book from "../../components/Book/Book";
+import { getBooksByFilter } from "../../actions/bookAction";
 import "./RelatedBook.scss";
 const RelatedBooks = () => {
+  const { bookDetail } = useSelector((state) => state.bookReducer);
+  const { bookbyFilter } = useSelector((state) => state.bookReducer);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const queryString = `?IdCategory=${bookDetail.category?.id}`;
+    dispatch(getBooksByFilter(queryString));
+  }, []);
   let settings = {
     dots: false,
     infinite: true,
@@ -41,20 +49,16 @@ const RelatedBooks = () => {
     slidesToShow: 5,
     slidesToScroll: 1,
   };
+  if (bookbyFilter?.length < 5) {
+    settings.slidesToShow = 2;
+  }
   return (
     <>
       <h3 className="text-3xl font-medium mb-6">Related Books</h3>
       <Slider className="related-book" {...settings}>
-        <Book />
-        <Book />
-        <Book />
-        <Book />
-        <Book />
-        <Book />
-        <Book />
-        <Book />
-        <Book />
-        <Book />
+        {bookbyFilter?.map((item, index) => (
+          <Book key={index} book={item} />
+        ))}
       </Slider>
     </>
   );

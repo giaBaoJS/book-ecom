@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllAuthor } from "../actions/authorAction";
+import { getAllBook, getBooksByFilter } from "../actions/bookAction";
 import ListAuthors from "../components/Authors/ListAuthors";
 import Banner from "../components/Banner/Banner";
 import Book from "../components/Book/Book";
 import FeatureCaterory from "../components/FeatureCaterory/FeatureCaterory";
 import TitleHome from "../shared/TitleHome/TitleHome";
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const { bookbyFilter } = useSelector((state) => state.bookReducer);
+  useEffect(() => {
+    dispatch(getBooksByFilter(""));
+  }, []);
   return (
     <div>
       <Banner />
@@ -13,8 +21,8 @@ const HomePage = () => {
         <div className="container">
           <TitleHome name="Trending Book" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-5 md:gap-5 lg:gap-7">
-            {[...Array(10)].map((item, index) => (
-              <Book key={index} />
+            {bookbyFilter?.map((item, index) => (
+              <Book key={index} book={item} />
             ))}
           </div>
         </div>
@@ -22,7 +30,7 @@ const HomePage = () => {
       <div className="authors py-12">
         <div className="container">
           <TitleHome name="Favourite Authors" />
-          <ListAuthors/>
+          <ListAuthors />
         </div>
       </div>
     </div>

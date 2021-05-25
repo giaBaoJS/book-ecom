@@ -1,5 +1,4 @@
 import {
-  CloseOutlined,
   HeartOutlined,
   PhoneOutlined,
   QuestionCircleOutlined,
@@ -7,13 +6,28 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Badge } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Drawer, Button } from "antd";
-import CartImg from "../../../assets/images/cart-img.jpg";
+import { Drawer } from "antd";
 import "./TopBar.scss";
+import { useDispatch, useSelector } from "react-redux";
+import UseHoc from "../../HOC/UseHoc";
+import CartTopBar from "../../HOC/CartTopBar";
+import UserSetting from "../../HOC/UserSetting";
+import { getBookInCart } from "../../../actions/bookAction";
+
 const TopBar = () => {
   const [visible, setVisible] = useState(false);
+  const [isClickCart, setIsClickCart] = useState(true);
+  const user = useSelector((state) => state.authReducer.user);
+  const { booksInCart } = useSelector((state) => state.bookReducer);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (localStorage.getItem("user") && user) {
+      dispatch(getBookInCart(user.id));
+    }
+  }, [user]);
 
   const showDrawer = () => {
     setVisible(true);
@@ -22,6 +36,7 @@ const TopBar = () => {
   const onClose = () => {
     setVisible(false);
   };
+  const Component = UseHoc(isClickCart ? CartTopBar : UserSetting);
   return (
     <div className="border-b-2">
       <div className="container">
@@ -40,45 +55,45 @@ const TopBar = () => {
             <Link to="/" className="px-4">
               <HeartOutlined />
             </Link>
-            <Link to="/" className="px-4">
-              <UserOutlined />
-            </Link>
-            <Badge count={0} showZero offset={[7,10]} size="small">
+            {user ? (
+              <div>
+                <UserOutlined
+                  className="text-red-500 px-4"
+                  onClick={() => {
+                    showDrawer();
+                    setIsClickCart(false);
+                  }}
+                />
+              </div>
+            ) : (
+              <Link to="/account" className="px-4">
+                <UserOutlined />
+              </Link>
+            )}
+
+            <Badge
+              count={booksInCart.length ? booksInCart.length : 0}
+              showZero
+              offset={[7, 10]}
+              size="small"
+            >
               <ShoppingCartOutlined
                 className="text-2xl pl-4"
-                onClick={showDrawer}
+                onClick={() => {
+                  showDrawer();
+                  setIsClickCart(true);
+                }}
               />
             </Badge>
             <Drawer
-              title="Your Shopping Cart"
+              title={isClickCart ? "Your Shopping Cart" : "Account"}
               placement="right"
-              width={620}
+              width={isClickCart ? 620 : 450}
               closable={true}
               onClose={onClose}
               visible={visible}
             >
-              {[...Array(5)].map((item, index) => (
-                <div className="px-8 py-8 border-b-2" key={index}>
-                  <div className="flex justify-between">
-                    <img src={CartImg} alt="cartimg" />
-                    <div className="flex-grow px-4">
-                      <Link className="mb-1 text-red-500">
-                        CHRISTIAN LIVING
-                      </Link>
-                      <h3 className="font-semibold text-base mb-1">
-                        <Link>The Last Sister (Columbia River Book 1)</Link>
-                      </h3>
-                      <p className="text-base text-gray-500 mb-1">
-                        <Link>Luanne Rice</Link>
-                      </p>
-                      <p className="text-lg font-semibold">1 x $16.59</p>
-                    </div>
-                    <div>
-                      <CloseOutlined className="text-lg cursor-pointer" />
-                    </div>
-                  </div>
-                </div>
-              ))}
+              <Component setVisible={setVisible} />
             </Drawer>
           </div>
         </div>
