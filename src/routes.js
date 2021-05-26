@@ -1,5 +1,6 @@
 import Account from "./components/Account/Account";
 import Page_404 from "./components/Page_404/Page_404";
+import Dashboard from "./pages/Admin/Dashboard/Dashboard";
 import AuthorDetail from "./pages/AuthorDetail/AuthorDetail";
 import BookDetail from "./pages/BookDetail/BookDetail";
 import Cart from "./pages/Cart/Cart";
@@ -15,8 +16,8 @@ export const routes = [
   { path: "/profile/:id/wishlist", exact: false, component: WishList },
   { path: "/account", exact: false, component: Account },
   { path: "/author/:id", exact: false, component: AuthorDetail },
-  {
-    path: "",
-    component: Page_404,
-  },
+];
+
+export const adminRoutes = [
+  { path: "/admin/dashboard", exact: false, component: Dashboard },
 ];
