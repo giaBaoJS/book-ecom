@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { BrowserRouter, Switch } from "react-router-dom";
-import { template } from "./configRoutes";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Page_404 from "./components/Page_404/Page_404";
+import { adminTemplate, template } from "./configRoutes";
 import { SET_STATE_FROM_LOCAL } from "./constants";
 
 function App() {
@@ -24,7 +25,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Switch>{template()}</Switch>
+      <Switch>
+        {template()}
+        {adminTemplate()}
+        <Route path="" component={Page_404} />
+      </Switch>
     </BrowserRouter>
   );
 }

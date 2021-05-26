@@ -14,6 +14,8 @@ export const routes = [
   { path: "/cart", exact: false, component: Cart },
   { path: "/profile/:id/wishlist", exact: false, component: WishList },
   { path: "/account", exact: false, component: Account },
+];
+
+export const adminRoutes = [
   { path: "/admin/dashboard", exact: false, component: Dashboard },
-  { path: "", component: Page_404 },
 ];

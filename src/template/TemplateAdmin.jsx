@@ -1,5 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { Route, useLocation } from "react-router-dom";
+import Navbar from "../components/AdminComponents/Navbar/Navbar";
+import SideBar from "../components/AdminComponents/SideBar/SideBar";
 
 const Layout = (props) => {
   const location = useLocation();
@@ -8,9 +10,9 @@ const Layout = (props) => {
   }, [location.pathname]);
   return (
     <>
-      Header
+      <Navbar />
+      <SideBar />
       <div>{props.children}</div>
-      Footer
     </>
   );
 };
