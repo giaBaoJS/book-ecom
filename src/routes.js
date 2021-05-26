@@ -1,5 +1,6 @@
 import Account from "./components/Account/Account";
 import Page_404 from "./components/Page_404/Page_404";
+import Dashboard from "./pages/Admin/Dashboard/Dashboard";
 import BookDetail from "./pages/BookDetail/BookDetail";
 import Cart from "./pages/Cart/Cart";
 import FilterBooks from "./pages/FilterBooks/FilterBooks";
@@ -13,8 +14,6 @@ export const routes = [
   { path: "/cart", exact: false, component: Cart },
   { path: "/profile/:id/wishlist", exact: false, component: WishList },
   { path: "/account", exact: false, component: Account },
-  {
-    path: "",
-    component: Page_404,
-  },
+  { path: "/admin/dashboard", exact: false, component: Dashboard },
+  { path: "", component: Page_404 },
 ];
