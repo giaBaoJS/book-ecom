@@ -1,13 +1,13 @@
 import { HeartFilled } from "@ant-design/icons";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addBookInCart } from "../../actions/bookAction";
 import BookImg from "../../assets/images/book-img.jpg";
 import "./Book.scss";
-const Book = ({ book }) => {
+const Book = ({ book, isInCart }) => {
   const dispatch = useDispatch();
-  const  user  = useSelector((state) => state.authReducer.user);
+  const user = useSelector((state) => state.authReducer.user);
   const handleAdd = () => {
     const wrapData = {
       idBook: book?.id,
@@ -33,16 +33,26 @@ const Book = ({ book }) => {
             <h4 className="font-medium text-lg">
               <Link to={`/book/${book.id}`}>{book.name}</Link>
             </h4>
-            <Link to="/" className=" block text-base mb-2">
+            <Link to={`/author/${book.author.id}`} className=" block text-base mb-2">
               {book.author.name}
             </Link>
             <span className="block font-medium text-lg">${book.price}</span>
           </div>
           <div className="absolute bottom-0 left-0 book__add">
             <div className="flex justify-between items-center">
-              <div onClick={handleAdd} className="add-to-cart text-base">
-                ADD TO CART
-              </div>
+              {isInCart ? (
+                <Link className="add-to-cart text-base" to="/cart">
+                  VIEW CART
+                </Link>
+              ) : (
+                <button
+                  onClick={handleAdd}
+                  className="add-to-cart text-base"
+                >
+                  ADD TO CART
+                </button>
+              )}
+
               <Link to="/" className="heart">
                 <span className="text-base">
                   <HeartFilled />

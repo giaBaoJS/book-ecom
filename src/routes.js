@@ -1,5 +1,6 @@
 import Account from "./components/Account/Account";
 import Page_404 from "./components/Page_404/Page_404";
+import AuthorDetail from "./pages/AuthorDetail/AuthorDetail";
 import BookDetail from "./pages/BookDetail/BookDetail";
 import Cart from "./pages/Cart/Cart";
 import FilterBooks from "./pages/FilterBooks/FilterBooks";
@@ -13,6 +14,7 @@ export const routes = [
   { path: "/cart", exact: false, component: Cart },
   { path: "/profile/:id/wishlist", exact: false, component: WishList },
   { path: "/account", exact: false, component: Account },
+  { path: "/author/:id", exact: false, component: AuthorDetail },
   {
     path: "",
     component: Page_404,

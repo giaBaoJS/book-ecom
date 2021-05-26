@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllAuthor } from "../actions/authorAction";
-import { getAllBook, getBooksByFilter } from "../actions/bookAction";
+import { getBooksByFilter } from "../actions/bookAction";
 import ListAuthors from "../components/Authors/ListAuthors";
 import Banner from "../components/Banner/Banner";
 import Book from "../components/Book/Book";
@@ -10,6 +9,7 @@ import TitleHome from "../shared/TitleHome/TitleHome";
 const HomePage = () => {
   const dispatch = useDispatch();
   const { bookbyFilter } = useSelector((state) => state.bookReducer);
+  const { booksInCart } = useSelector((state) => state.bookReducer);
   useEffect(() => {
     dispatch(getBooksByFilter(""));
   }, []);
@@ -22,7 +22,7 @@ const HomePage = () => {
           <TitleHome name="Trending Book" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-5 md:gap-5 lg:gap-7">
             {bookbyFilter?.map((item, index) => (
-              <Book key={index} book={item} />
+              <Book key={index} book={item} isInCart={booksInCart.find(i => i.book.id === item.id)}/>
             ))}
           </div>
         </div>

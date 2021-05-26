@@ -7,11 +7,11 @@ import {
 
 let initialState = {
   authors: [],
+  authorDetail: [],
 };
 
 export const authorReducer = (state = initialState, action) => {
   switch (action.type) {
-    
     case FETCH_ALL_AUTHOR:
       return {
         ...state,
@@ -20,6 +20,7 @@ export const authorReducer = (state = initialState, action) => {
     case GET_DETAIL_AUTHOR:
       return {
         ...state,
+        authorDetail: action.payload,
       };
     case CREATE_AUTHOR:
       return { ...state, jobs: action.payload };

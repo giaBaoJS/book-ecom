@@ -18,6 +18,7 @@ export const fetchAuthors = () => axios.get(url + authorApi);
 export const createAuthor = (newAuthor) => axios.post(url + authorApi, newAuthor);
 export const updateAuthor = (id, updateAuthor) => axios.put(`${url + authorApi}/${id}`, updateAuthor);
 export const deleteAuthor = (id) => axios.delete(`${url + authorApi}/${id}`);
+export const getAuthorById = (id) => axios.get(`${url + authorApi}/${id}`);
 
 //Category
 const categoryApi ='category';
