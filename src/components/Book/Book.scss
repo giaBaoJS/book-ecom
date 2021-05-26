@@ -44,9 +44,13 @@
       opacity: 1;
     }
   }
+  &:focus{
+    outline: none;
+  }
 }
 .heart {
   &:hover {
     color: #f75454;
   }
+  
 }

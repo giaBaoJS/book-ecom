@@ -1,3 +1,4 @@
+import { Empty } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -8,9 +9,11 @@ const CartTopBar = () => {
   const { subTotalInCart } = useSelector((state) => state.bookReducer);
   return (
     <>
-      {booksInCart?.map((data, index) => (
-        <BookInCart data={data} key={index} />
-      ))}
+      {booksInCart.length ? (
+        booksInCart.map((data, index) => <BookInCart data={data} key={index} />)
+      ) : (
+        <Empty className="py-5" description="No Item In Cart" />
+      )}
       <div className="px-8 py-10 pb-20">
         <div className="flex justify-between items-center mb-10">
           <p className="text-xl font-medium">Subtotal:</p>

@@ -7,7 +7,7 @@ const Author = ({author}) => {
       <Link>
         <img className="rounded-full mb-4 m-auto" style={{width:"142px"}} src={Avatar} alt="author-avatar" />
         <h4 className="text-base font-medium">{author.name}</h4>
-        <span className="text-gray-500">3 spanublished Books</span>
+        <span className="text-gray-500">{author.bookCount} spanublished Books</span>
       </Link>
     </div>
   );
