@@ -10,19 +10,27 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const { bookbyFilter } = useSelector((state) => state.bookReducer);
   const { booksInCart } = useSelector((state) => state.bookReducer);
+  const { booksInWishList } = useSelector((state) => state.bookReducer);
   useEffect(() => {
     dispatch(getBooksByFilter(""));
-  }, []);
+  }, [dispatch]);
   return (
     <div>
       <Banner />
-      <FeatureCaterory />
+      <FeatureCaterory />  
       <div className="py-24" style={{ backgroundColor: "#fff6f6" }}>
         <div className="container">
           <TitleHome name="Trending Book" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-5 md:gap-5 lg:gap-7">
             {bookbyFilter?.map((item, index) => (
-              <Book key={index} book={item} isInCart={booksInCart.find(i => i.book.id === item.id)}/>
+              <Book
+                key={index}
+                book={item}
+                isInWishList={booksInWishList.find(
+                  (i) => i.book.id === item.id
+                )}
+                isInCart={booksInCart.find((i) => i.book.id === item.id)}
+              />
             ))}
           </div>
         </div>

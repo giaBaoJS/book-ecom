@@ -1,0 +1,12 @@
+.checkout {
+    background-color: #fff6f6;
+  &__form {
+    .ant-form-item-label > label {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+  &__button{
+      line-height: 0 !important;
+  }
+}

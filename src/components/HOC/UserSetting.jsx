@@ -5,7 +5,7 @@ import {
   IdcardOutlined,
   PoweroffOutlined,
 } from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Modal } from "antd";
@@ -52,7 +52,7 @@ const UserSetting = (props) => {
       <div>
         <ul>
           <li className="mb-4 text-lg">
-            <Link className="flex items-center">
+            <Link to={`/profile/wishlist`} className="flex items-center">
               <HeartOutlined className="mr-3 text-red-500 " />
               My wishList
             </Link>
@@ -64,9 +64,9 @@ const UserSetting = (props) => {
             </Link>
           </li>
           <li className="mb-4 text-lg">
-            <Link className="flex items-center">
+            <Link to="/profile" className="flex items-center">
               <IdcardOutlined className="mr-3 text-blue-500" />
-              Edit profile
+              My Profile
             </Link>
           </li>
           <li className="mb-4 text-lg">

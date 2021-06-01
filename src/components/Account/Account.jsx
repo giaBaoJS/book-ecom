@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login, register } from "../../actions/authAction";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import moment from "moment";
 const dateFormat = "YYYY/MM/DD";
 
 const Account = () => {
@@ -27,8 +26,6 @@ const Account = () => {
     },
   };
   const onFinish = (values) => {
-    console.log("Success:", values);
-
     if (isLogin) {
       dispatch(login(values));
       history.push("/");

@@ -9,7 +9,7 @@ const ListAuthors = () => {
   const { authors } = useSelector((state) => state.authorReducer);
   useEffect(() => {
     dispatch(getAllAuthor());
-  }, []);
+  }, [dispatch]);
 
   let settings = {
     dots: false,

@@ -1,5 +1,4 @@
 import {
-  HeartOutlined,
   PhoneOutlined,
   QuestionCircleOutlined,
   ShoppingCartOutlined,
@@ -14,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UseHoc from "../../HOC/UseHoc";
 import CartTopBar from "../../HOC/CartTopBar";
 import UserSetting from "../../HOC/UserSetting";
-import { getBookInCart } from "../../../actions/bookAction";
+import { getBookInCart, getBookInWishList } from "../../../actions/bookAction";
 
 const TopBar = () => {
   const [visible, setVisible] = useState(false);
@@ -26,8 +25,9 @@ const TopBar = () => {
   useEffect(() => {
     if (localStorage.getItem("user") && user) {
       dispatch(getBookInCart(user.id));
+      dispatch(getBookInWishList(user.id));
     }
-  }, [user]);
+  }, [dispatch,user]);
 
   const showDrawer = () => {
     setVisible(true);
@@ -42,19 +42,19 @@ const TopBar = () => {
       <div className="container">
         <div className="topbar flex justify-between py-3">
           <div className="topbar__left flex items-center">
-            <Link className="flex items-center mr-5">
+            <Link to="/" className="flex items-center mr-5">
               <QuestionCircleOutlined className=" text-lg mr-2 leading-none" />
               <span className="text-base leading-none">Can we help you?</span>
             </Link>
-            <Link className="flex items-center">
+            <Link to="/" className="flex items-center">
               <PhoneOutlined className=" text-lg mr-2 leading-none" />
               <span className="text-base leading-none">+1 246-345-0695</span>
             </Link>
           </div>
           <div className="topbar__right flex items-center text-xl">
-            <Link to="/" className="px-4">
+            {/* <Link to="/profile/wishlist" className="px-4">
               <HeartOutlined />
-            </Link>
+            </Link> */}
             {user ? (
               <div>
                 <UserOutlined

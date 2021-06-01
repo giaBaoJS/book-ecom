@@ -1,14 +1,23 @@
-import { HeartFilled } from "@ant-design/icons";
-import React, { useState } from "react";
+import { HeartFilled, ShoppingFilled } from "@ant-design/icons";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addBookInCart } from "../../actions/bookAction";
+import { addBookInCart, addBookInWishList } from "../../actions/bookAction";
 import BookImg from "../../assets/images/book-img.jpg";
+import { notification } from 'antd';
+
 import "./Book.scss";
-const Book = ({ book, isInCart }) => {
+const Book = ({ book, isInCart, isInWishList }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authReducer.user);
-  const handleAdd = () => {
+  const handleAddToCart = () => {
+    notification.open({
+      message: 'Cart',
+      className: 'wishlist-notify cart-notify',
+      description:
+        'Added to your Cart!',
+        icon: <ShoppingFilled style={{ color: 'white' }} />,
+    });
     const wrapData = {
       idBook: book?.id,
       idUser: user?.id,
@@ -16,7 +25,20 @@ const Book = ({ book, isInCart }) => {
     };
     dispatch(addBookInCart(wrapData));
   };
-
+  const handleAddToWishList = () => {
+    notification.open({
+      message: 'Wishlist',
+      className: 'wishlist-notify',
+      description:
+        'Added to your Wishlist!',
+        icon: <HeartFilled style={{ color: 'white' }} />,
+    });
+    const dataWishList = {
+      idBook: book?.id,
+      idUser: user?.id,
+    };
+    dispatch(addBookInWishList(dataWishList));
+  };
   return (
     <div>
       <div className="p-10 bg-white rounded-lg border border-solid border-gray-300 book">
@@ -33,7 +55,10 @@ const Book = ({ book, isInCart }) => {
             <h4 className="font-medium text-lg">
               <Link to={`/book/${book.id}`}>{book.name}</Link>
             </h4>
-            <Link to={`/author/${book.author.id}`} className=" block text-base mb-2">
+            <Link
+              to={`/author/${book.author.id}`}
+              className=" block text-base mb-2"
+            >
               {book.author.name}
             </Link>
             <span className="block font-medium text-lg">${book.price}</span>
@@ -46,18 +71,25 @@ const Book = ({ book, isInCart }) => {
                 </Link>
               ) : (
                 <button
-                  onClick={handleAdd}
+                  onClick={handleAddToCart}
                   className="add-to-cart text-base"
                 >
                   ADD TO CART
                 </button>
               )}
-
-              <Link to="/" className="heart">
-                <span className="text-base">
-                  <HeartFilled />
-                </span>
-              </Link>
+              {isInWishList ? (
+                <Link to="/profile/wishlist" className="heart">
+                  <span className="text-base isClicked">
+                    <HeartFilled/>
+                  </span>
+                </Link>
+              ) : (
+                <div className="heart">
+                  <span className="text-base">
+                    <HeartFilled onClick={handleAddToWishList} />
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>

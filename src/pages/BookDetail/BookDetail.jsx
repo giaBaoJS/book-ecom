@@ -16,7 +16,7 @@ const BookDetail = () => {
   const { bookDetail } = useSelector((state) => state.bookReducer);
   useEffect(() => {
     dispatch(getBookById(id));
-  }, [id]);
+  }, [dispatch, id]);
   let settings = {
     dots: true,
     infinite: false,
