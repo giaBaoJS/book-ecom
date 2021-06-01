@@ -1,5 +1,10 @@
 import Account from "./components/Account/Account";
+import AuthorManager from "./pages/Admin/AuthorManager/AuthorManager";
+import BookManager from "./pages/Admin/BookManager/BookManager";
+import CategoryManager from "./pages/Admin/CategoryManager/CategoryManager";
 import Dashboard from "./pages/Admin/Dashboard/Dashboard";
+import OrderManager from "./pages/Admin/OrderManager/OrderManager";
+import UserManager from "./pages/Admin/UserManager/UserManager";
 import AuthorDetail from "./pages/AuthorDetail/AuthorDetail";
 import BookDetail from "./pages/BookDetail/BookDetail";
 import Cart from "./pages/Cart/Cart";
@@ -23,4 +28,9 @@ export const routes = [
 
 export const adminRoutes = [
   { path: "/admin/dashboard", exact: false, component: Dashboard },
+  { path: "/admin/author", exact: false, component: AuthorManager },
+  { path: "/admin/category", exact: false, component: CategoryManager },
+  { path: "/admin/user", exact: false, component: UserManager },
+  { path: "/admin/book", exact: false, component: BookManager },
+  { path: "/admin/order", exact: false, component: OrderManager },
 ];
