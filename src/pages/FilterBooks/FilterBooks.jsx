@@ -23,7 +23,7 @@ const FilterBooks = () => {
                   <ul>
                     {[...Array(10)].map((item, index) => (
                       <li>
-                        <Link>Arts & Photography</Link>
+                        <Link to="/">Arts & Photography</Link>
                       </li>
                     ))}
                   </ul>

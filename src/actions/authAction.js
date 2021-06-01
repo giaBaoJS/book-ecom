@@ -1,5 +1,6 @@
+import axios from "axios";
 import * as api from "../api";
-import { LOGIN, LOGOUT, REGISTER } from "../constants";
+import { LOGIN, LOGOUT, REGISTER, UPDATE_USER } from "../constants";
 
 export const login = (loginModel) => async (dispatch) => {
   try {
@@ -7,6 +8,8 @@ export const login = (loginModel) => async (dispatch) => {
     localStorage.setItem("token", data.token);
     localStorage.setItem("expiration", data.expiration);
     localStorage.setItem("user", JSON.stringify(data.user));
+    axios.defaults.headers.common['Authorization'] ="Bearer "+  data.token;
+
     dispatch({
       type: LOGIN,
       payload: data,
@@ -34,6 +37,18 @@ export const register = (profileUser) => async (dispatch) => {
     const { data } = await api.register(profileUser);
     dispatch({
       type: REGISTER,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const updateUser = (id, userData) => async (dispatch) => {
+  try {
+    const { data } = await api.updateUser(id, userData);
+    dispatch({
+      type: UPDATE_USER,
       payload: data,
     });
   } catch (error) {

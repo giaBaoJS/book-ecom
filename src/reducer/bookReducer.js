@@ -1,10 +1,13 @@
 import {
   ADD_BOOK_IN_CART,
+  ADD_BOOK_IN_WISHLIST,
   CREATE_BOOK,
   DELETE_BOOK_IN_CART,
+  DELETE_BOOK_IN_WISHLIST,
   FETCH_ALL_BOOK,
   GET_BOOK_BY_FILTER,
   GET_BOOK_IN_CART,
+  GET_BOOK_IN_WISHLIST,
   GET_DETAIL_BOOK,
   LOGOUT,
   UPDATE_BOOK,
@@ -14,6 +17,7 @@ let initialState = {
   books: [],
   bookDetail: [],
   booksInCart: [],
+  booksInWishList: [],
   subTotalInCart: 0,
 };
 
@@ -68,6 +72,22 @@ export const bookReducer = (state = initialState, action) => {
         subTotalInCart,
       };
     }
+    case GET_BOOK_IN_WISHLIST:
+      return {
+        ...state,
+        booksInWishList: action.payload,
+      };
+    case ADD_BOOK_IN_WISHLIST:
+      return {
+        ...state,
+      };
+    case DELETE_BOOK_IN_WISHLIST:
+      return {
+        ...state,
+        booksInWishList: state.booksInWishList.filter(
+          (book) => book.id !== action.payload
+        ),
+      };
     case UPDATE_BOOK:
       return {
         ...state,

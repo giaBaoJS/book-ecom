@@ -1,4 +1,10 @@
-import { LOGIN, LOGOUT, SET_STATE_FROM_LOCAL,REGISTER } from "../constants";
+import {
+  LOGIN,
+  LOGOUT,
+  SET_STATE_FROM_LOCAL,
+  REGISTER,
+  UPDATE_USER,
+} from "../constants";
 
 let initialState = {
   token: null,
@@ -30,10 +36,16 @@ export const authReducer = (state = initialState, action) => {
         expiration: localStorage.getItem("expiration"),
         user: JSON.parse(localStorage.getItem("user")),
       };
-      case REGISTER:
-        return{
-          ...state,
-        }
+    case REGISTER:
+      return {
+        ...state,
+      };
+    case UPDATE_USER:
+      localStorage.setItem("user", JSON.stringify(action.payload));
+      return {
+        ...state,
+        user: action.payload,
+      };
     default:
       return state;
   }

@@ -24,8 +24,17 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const SET_STATE_FROM_LOCAL = "SET_STATE_FROM_LOCAL";
 export const REGISTER = "REGISTER";
+export const UPDATE_USER = "UPDATE_USER";
 
 //Cart
 export const ADD_BOOK_IN_CART = "ADD_BOOK_IN_CART";
 export const GET_BOOK_IN_CART = "GET_BOOK_IN_CART";
 export const DELETE_BOOK_IN_CART = "DELETE_BOOK_IN_CART";
+
+//Wishlist
+export const ADD_BOOK_IN_WISHLIST = "ADD_BOOK_IN_WISHLIST";
+export const GET_BOOK_IN_WISHLIST = "GET_BOOK_IN_WISHLIST";
+export const DELETE_BOOK_IN_WISHLIST = "DELETE_BOOK_IN_WISHLIST";
+
+//Order
+export const PLACE_ORDER = "PLACE_ORDER";

@@ -14,7 +14,7 @@ const AuthorDetail = () => {
   useEffect(() => {
     dispatch(getAuthorById(id));
     dispatch(getBooksByFilter(queryString));
-    }, [id]);
+  }, [dispatch, id, queryString]);
   return (
     <div className="py-24 author-detail">
       <div className="container">
@@ -45,10 +45,12 @@ const AuthorDetail = () => {
         <div>
           <h2 className="text-center text-3xl">
             Book of{" "}
-            <span className="font-semibold text-red-400">{authorDetail.name}</span>
+            <span className="font-semibold text-red-400">
+              {authorDetail.name}
+            </span>
           </h2>
           <div>
-              <RelatedBooks/>
+            <RelatedBooks />
           </div>
         </div>
       </div>

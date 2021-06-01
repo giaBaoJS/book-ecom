@@ -29,8 +29,8 @@ const Cart = () => {
               />
             </div>
             <div className="w-3/4">
-              <Link className="block text-lg font-medium">{name}</Link>
-              <Link className="block text-base text-gray-600 hover:text-red-600">
+              <Link to={`/book/${data.bookId}`} className="block text-lg font-medium">{name}</Link>
+              <Link to={`/author/${data.authorId}`} className="block text-base text-gray-600 hover:text-red-600">
                 {data.author}
               </Link>
             </div>
@@ -59,12 +59,12 @@ const Cart = () => {
       dataIndex: "id",
       key: "x",
       render: (id) => (
-        <Link className="text-xl">
+        <div className="text-xl">
           <CloseOutlined
             className="hover:text-red-600"
             onClick={() => showDeleteConfirm(id)}
           />
-        </Link>
+        </div>
       ),
     },
   ];
@@ -84,6 +84,8 @@ const Cart = () => {
   let data = [];
   data = booksInCart.map((data, index) => ({
     key: index,
+    bookId:data.book.id,
+    authorId:data.book.author.id,
     author: data.book.author.name,
     name: data.book.name,
     price: `$${data.book.price}`,
@@ -96,7 +98,7 @@ const Cart = () => {
       <h3 className="text-4xl font-medium text-center mb-20">
         Your Cart: {booksInCart.length} items
       </h3>
-      <div className="container">
+      <div className="container"> 
         <div className="flex flex-wrap cart__wrap">
           <div className="col-9 col">
             <div>

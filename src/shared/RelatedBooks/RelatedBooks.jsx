@@ -11,7 +11,7 @@ const RelatedBooks = () => {
   useEffect(() => {
     const queryString = `?IdCategory=${bookDetail.category?.id}`;
     dispatch(getBooksByFilter(queryString));
-  }, []);
+  }, [dispatch, bookDetail.category?.id]);
   let settings = {
     dots: false,
     infinite: true,

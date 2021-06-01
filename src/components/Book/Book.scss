@@ -49,8 +49,31 @@
   }
 }
 .heart {
+ 
   &:hover {
     color: #f75454;
   }
   
+}
+.isClicked{
+  background: red;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+}
+.wishlist-notify{
+  background: #e20b0b !important;
+  color: white;
+  .ant-notification-notice-message{
+    color: white;
+  }
+  .anticon{
+    color: white;
+  }
+  &.cart-notify{
+    background: #17c37c !important;
+  }
 }
