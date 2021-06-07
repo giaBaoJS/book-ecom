@@ -1,8 +1,27 @@
-import { Button, Table } from "antd";
-import React from "react";
+import { Button, Col, Input, Row, Table } from "antd";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategory } from "../../../actions/categoryAction";
 import ActionButton from "../ActionButton/ActionButton";
 
 const CategoryManager = () => {
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.categoryReducer);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    dispatch(getAllCategory());
+  }, []);
+  useEffect(() => {
+    if (categories.length) {
+      setData(
+        categories.map((item) => ({
+          key: item.id,
+          ...item,
+          action: item,
+        }))
+      );
+    }
+  }, [categories]);
   const columns = [
     {
       title: "Id",
@@ -27,27 +46,31 @@ const CategoryManager = () => {
     },
   ];
 
-  const data = [];
-  for (let i = 0; i < 100; i++) {
-    let item = {
-      key: i,
-      id: i,
-      name: `Edward King ${i}`,
-    };
-    data.push({
-      ...item,
-      action: item,
-    });
-  }
   const handleOnEdit = (data) => {
     console.log(data);
   };
   const handleOnDelete = (data) => {
     console.log(data);
   };
+  const handleOnSearch = (e) => {
+    const { value } = e.target;
+    const keyword = value.trim();
+    setData(
+      categories.filter(
+        (item) => item.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+      )
+    );
+  };
   return (
     <div>
-      <Button type="primary">Add new Category</Button>
+      <Row justify="space-between">
+        <Col span={16}>
+          <Input placeholder="Enter keyword..." onChange={handleOnSearch} />
+        </Col>
+        <Col>
+          <Button type="primary">Add new Category</Button>
+        </Col>
+      </Row>
       <br />
       <br />
       <Table
