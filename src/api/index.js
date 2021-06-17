@@ -24,9 +24,9 @@ export const deleteAuthor = (id) => axios.delete(`${url + authorApi}?id=${id}`);
 //Book
 const bookApi = "book";
 
-export const fetchBooks = (queryString) =>
-  axios.get(`${url + bookApi}${queryString}`);
-export const getBookById = (id) => axios.get(`${url + bookApi}/${id}`);
+export const fetchBooks = (queryString) => axios.get(`${url + bookApi}${queryString}`);
+export const fetchBooksTrending = () => axios.get(`${url + bookApi}/trending`);
+export const getBookById =(id) => axios.get(`${url + bookApi}/${id}`);
 export const createBook = (newBook) => axios.post(url + bookApi, newBook);
 export const updateBook = (id, updateBook) =>
   axios.put(`${url + bookApi}/${id}`, updateBook);
@@ -47,12 +47,10 @@ export const deleteCaterory = (id) =>
 const userApi = "user";
 
 //Cart
-export const addBookInCart = (data) =>
-  axios.post(`${url + userApi}/addbookintocart`, data);
-export const getBookInCart = (id) =>
-  axios.get(`${url + userApi}/booksincart/${id}`);
-export const deleteBookInCart = (id) =>
-  axios.delete(`${url + userApi}/deletebookfromcart/${id}`);
+export const addBookInCart = (data) => axios.post(`${url+userApi}/addbookintocart`,data);
+export const getBookInCart = (id) => axios.get(`${url+userApi}/booksincart/${id}`);
+export const updateBookInCart = (id,quantity) => axios.put(`${url+userApi}/updatebookincart/${id}?quantity=${quantity}`);
+export const deleteBookInCart = (id) => axios.delete(`${url+userApi}/deletebookfromcart/${id}`);
 
 //Wishlist
 export const addBookInWishList = (data) =>

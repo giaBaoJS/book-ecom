@@ -1,101 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./FilterBooks.scss";
-import { Collapse } from "antd";
-import { Link } from "react-router-dom";
 import { Select } from "antd";
 import { Pagination } from "antd";
-import { Slider } from "antd";
 import Book from "../../components/Book/Book";
-import BookImg from "../../assets/images/book-img.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { getBooksByFilter } from "../../actions/bookAction";
+import FillterCollapse from "../../components/FilterCollapse/FillterCollapse";
 const { Option } = Select;
-const { Panel } = Collapse;
 
-const test = ["Categories", "Author"];
 const FilterBooks = () => {
+  const dispatch = useDispatch();
+  const { bookbyFilter } = useSelector((state) => state.bookReducer);
+  const { booksInCart } = useSelector((state) => state.bookReducer);
+  const { booksInWishList } = useSelector((state) => state.bookReducer);
+  const { count } = useSelector((state) => state.bookReducer);
+  const [pageIndex, setPageIndex] = useState(1);
+  const pageSize = 12;
+  useEffect(() => {
+    dispatch(getBooksByFilter(`?Skip=${pageIndex}&Offset=${pageSize}`));
+    // dispatch(getBooksByFilter(""));
+  }, [dispatch, pageIndex]);
+  function handleChange(value) {
+    const queryString = `?OrderBy=${value}&Skip=${pageIndex}&Offset=${pageSize}`;
+    dispatch(getBooksByFilter(queryString));
+  }
+  const onChange = (e) => {
+    setPageIndex(e);
+  };
   return (
     <div className="filter-books py-24">
       <div className="container">
         <div className="flex flex-wrap wrap-books">
           <div className="col-3 col">
-            <Collapse defaultActiveKey={["0", "1", "2", "3"]}>
-              {test.map((item, index) => (
-                <Panel header={item} key={index}>
-                  <ul>
-                    {[...Array(10)].map((item, index) => (
-                      <li>
-                        <Link to="/">Arts & Photography</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </Panel>
-              ))}
-              <Panel header="Filter by price" key={2}>
-                <div>
-                  <Slider range defaultValue={[20, 50]} />
-                </div>
-              </Panel>
-              <Panel header="Featured Books" key={3}>
-                {[...Array(4)].map((item, index) => (
-                  <div className="flex mb-3">
-                    <div className="w-1/4 px-2">
-                      <Link to="/">
-                        <img src={BookImg} alt="book-img" />
-                      </Link>
-                    </div>
-                    <div className="w-3/4 px-2">
-                      <Link to="/" className="block text-base mb-2">
-                        Blindside (Michael Bennett Book 12)
-                      </Link>
-                      <span className="block">$15.99</span>
-                    </div>
-                  </div>
-                ))}
-              </Panel>
-            </Collapse>
-            ,
+            <FillterCollapse />
           </div>
           <div className="col-9 col">
             <div className="filter__top flex flex-col-reverse md:flex-row   items-center justify-between mb-8">
               <p className="text-lg">
-                Showing all <span className="font-medium">20</span> result
+                Showing all{" "}
+                <span className="font-medium">{bookbyFilter?.length}</span>{" "}
+                result
               </p>
               <div>
                 <Select
-                  className="mb-4 md:mb-0"
-                  showSearch
+                  className="mb-4 md:mb-0 filter__select"
                   style={{ width: 200 }}
-                  placeholder="Sorting"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                  filterSort={(optionA, optionB) =>
-                    optionA.children
-                      .toLowerCase()
-                      .localeCompare(optionB.children.toLowerCase())
-                  }
+                  onChange={handleChange}
+                  placeholder="Sort by"
                 >
-                  <Option value="1">Not Identified</Option>
-                  <Option value="2">Closed</Option>
-                  <Option value="3">Communicated</Option>
-                  <Option value="4">Identified</Option>
-                  <Option value="5">Resolved</Option>
-                  <Option value="6">Cancelled</Option>
+                  <Option value="0">Price (High - Low)</Option>
+                  <Option value="1">Price (Low - High)</Option>
+                  <Option value="2">Newest</Option>
+                  <Option value="3">Most Favorite</Option>
                 </Select>
               </div>
             </div>
             <div className="filter___mid">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
-                {[...Array(12)].map((item, index) => (
-                  <Book key={index} />
+                {bookbyFilter?.map((item, index) => (
+                  <Book
+                    key={index}
+                    book={item}
+                    isInWishList={booksInWishList.find(
+                      (i) => i.book.id === item.id
+                    )}
+                    isInCart={booksInCart.find((i) => i.book.id === item.id)}
+                  />
                 ))}
               </div>
               <Pagination
                 className="text-center"
-                defaultCurrent={6}
-                total={500}
+                defaultCurrent={pageIndex}
+                defaultPageSize={pageSize}
+                onChange={onChange}
+                total={count}
               />
             </div>
           </div>
