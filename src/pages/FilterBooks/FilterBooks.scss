@@ -1,5 +1,6 @@
 @import "../../mixin.scss";
 .filter-books {
+  background-color: #eac5ca;
   .col-3 {
     width: calc(100% / 12 * 3);
   }
@@ -7,12 +8,24 @@
     width: calc(100% / 12 * 9);
   }
   @include media(768px) {
-    .col-3,.col-9 {
+    .col-3,
+    .col-9 {
       width: 100%;
     }
   }
+
 }
 .wrap-books {
   margin-left: -15px;
   margin-right: -15px;
+}
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  background-color: #585858e0 !important;
+  color: white  !important;
+}
+.filter__select{
+  .ant-select-selector{
+    border-color:#902f3bf5  !important;
+  }
 }

@@ -33,7 +33,7 @@ const Book = ({ book, isInCart, isInWishList }) => {
         'Added to your Wishlist!',
         icon: <HeartFilled style={{ color: 'white' }} />,
     });
-    const dataWishList = {
+    const dataWishList = {  
       idBook: book?.id,
       idUser: user?.id,
     };
@@ -74,7 +74,7 @@ const Book = ({ book, isInCart, isInWishList }) => {
                   onClick={handleAddToCart}
                   className="add-to-cart text-base"
                 >
-                  ADD TO CART
+                  ADD TO CARTy
                 </button>
               )}
               {isInWishList ? (
@@ -84,7 +84,7 @@ const Book = ({ book, isInCart, isInWishList }) => {
                   </span>
                 </Link>
               ) : (
-                <div className="heart">
+                <div className="heart"> 
                   <span className="text-base">
                     <HeartFilled onClick={handleAddToWishList} />
                   </span>

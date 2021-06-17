@@ -9,6 +9,8 @@ import {
   ADD_BOOK_IN_WISHLIST,
   GET_BOOK_IN_WISHLIST,
   DELETE_BOOK_IN_WISHLIST,
+  FETCH_BOOK_TRENDING,
+  UPDATE_BOOK_IN_CART,
 } from "../constants/index";
 export const getAllBook = () => async (dispatch) => {
   try {
@@ -24,6 +26,17 @@ export const getAllBook = () => async (dispatch) => {
   }
 };
 
+export const getBooksTrending = () => async (dispatch) => {
+  try {
+    const { data } = await api.fetchBooksTrending();
+    dispatch({
+      type: FETCH_BOOK_TRENDING,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 export const getBookById = (id) => async (dispatch) => {
   try {
     const { data: bookDetail } = await api.getBookById(id);
@@ -42,6 +55,7 @@ export const getBooksByFilter = (querystring) => async (dispatch) => {
     dispatch({
       type: GET_BOOK_BY_FILTER,
       payload: bookbyFilter.data,
+      count: bookbyFilter.count,
     });
   } catch (error) {
     console.log(error.message);
@@ -51,7 +65,6 @@ export const getBooksByFilter = (querystring) => async (dispatch) => {
 export const addBookInCart = (obj) => async (dispatch) => {
   try {
     const { data } = await api.addBookInCart(obj);
-    console.log(data);
     dispatch({
       type: ADD_BOOK_IN_CART,
       payload: data,
@@ -66,6 +79,17 @@ export const getBookInCart = (id) => async (dispatch) => {
     const { data } = await api.getBookInCart(id);
     dispatch({
       type: GET_BOOK_IN_CART,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+export const updateBookInCart = (id,quantity) => async (dispatch) => {
+  try {
+    const { data } = await api.updateBookInCart(id,quantity);
+    dispatch({
+      type: UPDATE_BOOK_IN_CART,
       payload: data,
     });
   } catch (error) {
@@ -87,7 +111,6 @@ export const deleteBookInCart = (id) => async (dispatch) => {
 
 export const addBookInWishList = (obj) => async (dispatch) => {
   try {
-    
     const { data } = await api.addBookInWishList(obj);
     dispatch({
       type: ADD_BOOK_IN_WISHLIST,
@@ -121,19 +144,3 @@ export const deleteBookInWishList = (id) => async (dispatch) => {
     console.log(error.message);
   }
 };
-
-// export const updateJob = (id, job) => async (dispatch) => {
-//   console.log(job);
-//   try {
-//     const { data } = await api.updateJob(id, job);
-//     dispatch({
-//       type: TURN_OFF_MODAL,
-//     });
-//     dispatch({
-//       type: UPDATE_JOB,
-//       payload: data,            
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };

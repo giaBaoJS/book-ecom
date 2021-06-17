@@ -45,7 +45,7 @@ const Tablist = () => {
           <div className="flex justify-between p-4 tabs">
             <p className="text-lg font-medium">Category:</p>
             <p className="text-lg">
-              <Link className="heart" to="/">
+              <Link className="heart" to="/book/filter">
                 {bookDetail.category.name}
               </Link>
             </p>
@@ -53,7 +53,7 @@ const Tablist = () => {
           <div className="flex justify-between p-4 tabs">
             <p className="text-lg font-medium">Book Author:</p>
             <p className="text-lg">
-              <Link className="heart" to="/">
+              <Link className="heart" to={`/author/${bookDetail.author.id}`}>
                 {bookDetail.author.name}
               </Link>
             </p>

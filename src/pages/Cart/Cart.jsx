@@ -5,7 +5,7 @@ import { CloseOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import SideCart from "../../components/SideCart/SideCart";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBookInCart } from "../../actions/bookAction";
+import { deleteBookInCart, updateBookInCart } from "../../actions/bookAction";
 import CartImg from "../../assets/images/cart-img.jpg";
 import { Modal } from "antd";
 const { confirm } = Modal;
@@ -13,6 +13,9 @@ const { confirm } = Modal;
 const Cart = () => {
   const { booksInCart } = useSelector((state) => state.bookReducer);
   const dispatch = useDispatch();
+  const onChangeQuantity = (quantity, id) => {
+    dispatch(updateBookInCart(id, quantity));
+  };
   const columns = [
     {
       title: "Book",
@@ -29,8 +32,16 @@ const Cart = () => {
               />
             </div>
             <div className="w-3/4">
-              <Link to={`/book/${data.bookId}`} className="block text-lg font-medium">{name}</Link>
-              <Link to={`/author/${data.authorId}`} className="block text-base text-gray-600 hover:text-red-600">
+              <Link
+                to={`/book/${data.bookId}`}
+                className="block text-lg font-medium"
+              >
+                {name}
+              </Link>
+              <Link
+                to={`/author/${data.authorId}`}
+                className="block text-base text-gray-600 hover:text-red-600"
+              >
                 {data.author}
               </Link>
             </div>
@@ -46,8 +57,13 @@ const Cart = () => {
     {
       title: "Quantity",
       dataIndex: "quantity",
-      render: (text, row) => (
-        <InputNumber className="text-center" defaultValue={text} min="1" />
+      render: (text, data) => (
+        <InputNumber
+          className="text-center"
+          onChange={(e) => onChangeQuantity(e, data.id)}
+          defaultValue={text}
+          min="1"
+        />
       ),
     },
     {
@@ -84,8 +100,8 @@ const Cart = () => {
   let data = [];
   data = booksInCart.map((data, index) => ({
     key: index,
-    bookId:data.book.id,
-    authorId:data.book.author.id,
+    bookId: data.book.id,
+    authorId: data.book.author.id,
     author: data.book.author.name,
     name: data.book.name,
     price: `$${data.book.price}`,
@@ -98,7 +114,7 @@ const Cart = () => {
       <h3 className="text-4xl font-medium text-center mb-20">
         Your Cart: {booksInCart.length} items
       </h3>
-      <div className="container"> 
+      <div className="container">
         <div className="flex flex-wrap cart__wrap">
           <div className="col-9 col">
             <div>
@@ -130,7 +146,7 @@ const Cart = () => {
             <SideCart />
             <div>
               <Link
-                to="/"
+                to="/checkout"
                 className="block w-full text-white bg-black p-6 text-center text-lg hover:text-white"
               >
                 Proceed to checkout
