@@ -12,7 +12,7 @@ import {
 import logo from "../../../assets/images/tmalogo.png";
 import "./index.scss";
 import { useHistory, useLocation } from "react-router";
-import { handleRoute } from "../../../actions/adminActions/route";
+import { handleRoute } from "../../../actions/config";
 
 const SideBar = ({ isOpen }) => {
   const history = useHistory();

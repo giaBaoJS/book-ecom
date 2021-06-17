@@ -8,7 +8,7 @@ export const login = (loginModel) => async (dispatch) => {
     localStorage.setItem("token", data.token);
     localStorage.setItem("expiration", data.expiration);
     localStorage.setItem("user", JSON.stringify(data.user));
-    axios.defaults.headers.common['Authorization'] ="Bearer "+  data.token;
+    axios.defaults.headers.common["Authorization"] = "Bearer " + data.token;
 
     dispatch({
       type: LOGIN,
